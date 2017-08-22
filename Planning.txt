@@ -1,0 +1,46 @@
+Dominion Randomizer Planning
+Date: 2017.Aug.18
+
+>Types of dominion objects
+	>Kingdom cards
+		-Typical, playable cards, like Village or Magpie
+	
+		>Special cards
+			-Non-kingdom cards, not in the supply, cannot be obtain through usual means
+			-Prizes
+			-Traveller upgrades
+	>Basic Supply cards
+		-Basic treasures (copper, silver, gold), curses, basic victory points (estate, duchy, province), potion
+	>Events
+		-Buyable effects, but are not kingdom cards
+	>Landmarks
+		-Influence victory point scoring, but are not kingdom cards
+
+>Dominion class
+	>Static
+	>Contains a list of "dominion objects"
+	>Dominion objects include kingdom cards, which are the playable cards, supply cards,
+	events, landmarks, etc.
+	>Can query class to obtain full list or a subset based on search params (eg. cards of a certain set)
+	
+CLASS STRUCTURE
+
+interface IBuyable
+	>int CoinCost
+	>string OtherCosts
+	
+class DominionObject
+	>string Name
+	>DominionSet Set
+	>string Text
+	
+	class DominionEvent : DominionObject, IBuyable
+		...
+		
+	class DominionLandmark : DominionObject
+		...
+		
+	class DominionCard : DominionObject, IBuyable
+		>List<DominionType> Types
+		>bool IsAKingdomCard (true if card can be one of the 10 starting kingdom cards, is in the supply, and is normally obtainable)
+		>string Notes
